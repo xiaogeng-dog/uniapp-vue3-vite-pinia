@@ -1,0 +1,25 @@
+<template>
+  <view class="home">
+    <wd-cell title="清除登录信息" @click="doLogout" icon="ic_shutdown_line" is-link />
+  </view>
+</template>
+
+<script lang="ts" setup>
+const authStore = useAuthStore()
+/**
+ * 登出
+ */
+function doLogout() {
+  // 点击的确认按钮
+  authStore.logout()
+}
+</script>
+
+<style lang="scss" scoped>
+.home {
+  min-height: calc(100vh - var(--window-top) - var(--window-bottom));
+  width: 100vw;
+  box-sizing: border-box;
+  background: #fff;
+}
+</style>
