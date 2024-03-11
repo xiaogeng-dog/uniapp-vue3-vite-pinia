@@ -14,27 +14,11 @@
     "sourceMap": false,
     "skipLibCheck": true,
     "baseUrl": ".",
-    "types": [
-      "@dcloudio/types",
-      "miniprogram-api-typings",
-      "mini-types",
-      "wot-design-uni/global.d.ts"
-    ],
+    "types": ["@dcloudio/types", "miniprogram-api-typings", "mini-types"],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
-  "exclude": [
-    "node_modules",
-    "unpackage",
-    "src/**/*.nvue"
-  ],
+  "exclude": ["node_modules", "unpackage", "src/**/*.nvue"]
 }
