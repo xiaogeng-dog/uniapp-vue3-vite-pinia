@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { uniAdapter } from 'fant-axios-adapter'
 import AxiosCancelToken from './AxiosCancelToken'
+import NProgress from '@/utils/progress'
 const axiosCancelToken = new AxiosCancelToken()
 import { TIME_OUT, MAIN_BASE_URL } from './config'
 
@@ -25,6 +26,7 @@ export default class ApiClient {
     })
     instance.interceptors.request.use(
       (request) => {
+        NProgress.start()
         console.log('🚀 ~ ApiClient ~ create ~ request:', request)
         // 设置conten-type
         // request.headers ? (request.headers['Content-Type'] = 'application/json') : (request.headers = { 'Content-Type': 'application/json' })
@@ -69,6 +71,7 @@ export default class ApiClient {
 
     instance.interceptors.response.use(
       (response) => {
+        NProgress.done()
         // 此处为前后端约定的接口成功的字段，旨在处理状态码为200的错误响应，开发者可自行调整
         if (response.status === 200) {
           if (response?.data?.code == 400) {
@@ -90,6 +93,7 @@ export default class ApiClient {
         }
       },
       (error) => {
+        NProgress.done()
         if (error.status !== 0 && !error.status) {
           const newError = error as any
           newError.msg = newError.errMsg || '请检查网络设置'

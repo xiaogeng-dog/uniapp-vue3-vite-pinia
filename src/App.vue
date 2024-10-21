@@ -8,7 +8,7 @@ import 'vant/es/image-preview/style'
 // #endif
 
 onLaunch(async (ctx) => {
-  useAuthStore().getOpenIdAction()
+  // useAuthStore().getOpenIdAction()
   // useAuthStore().getJSApiTicketAction(
   //   '85_97ynbvbnGvxvfXgSvOZPEFZbrOH3pKAph3EejJksGOAWAavcpHlg7efWscr6_nFCSqDsDe0L8Pho_iLb57EQp9SioU_VyuymLMJEgdsDXHM'
   // )

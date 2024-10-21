@@ -18,8 +18,7 @@ export default defineFlatConfig([
       'public/*',
       'src/assets/**',
       'babel.config.js',
-      'src/uni_modules/*',
-      'koa-mock/*'
+      'src/uni_modules/*'
     ],
     languageOptions: {
       globals: globals.browser

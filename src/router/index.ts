@@ -1,9 +1,11 @@
 import pagesJson from '../pages.json'
 import pagesJsonToRoutes from 'uni-parse-pages'
+import NProgress from '@/utils/progress'
 const router = createRouter({
   routes: [...pagesJsonToRoutes(pagesJson)]
 })
 router.beforeEach((to, from, next) => {
+  NProgress.start()
   const authStore = useAuthStore()
   if (to.name !== 'register') {
     authStore.isJudgeRegister()
@@ -20,6 +22,7 @@ router.beforeEach((to, from, next) => {
   }
 })
 router.afterEach((to) => {
+  NProgress.done()
   const authStore = useAuthStore()
 
   if (!authStore.$state.userInfo && to.name !== 'login') {
