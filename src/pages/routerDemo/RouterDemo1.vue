@@ -1,7 +1,7 @@
 <template>
   <view>
-    <test></test>
-    <wd-button block size="large" type="primary" @click="back">返回</wd-button>
+    <test />
+    <van-button block size="large" type="primary" @click="back">返回</van-button>
   </view>
 </template>
 

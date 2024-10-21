@@ -5,6 +5,10 @@ const router = createRouter({
 })
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
+  if (to.name !== 'register') {
+    authStore.isJudgeRegister()
+  }
+
   if (!authStore.$state.userInfo && to && to.name !== 'login') {
     // 如果没有登录信息且目标路由不是登录页面则跳转到登录页面
     next({ name: 'login', navType: 'replaceAll' })
@@ -15,8 +19,9 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
-router.afterEach((to, from) => {
+router.afterEach((to) => {
   const authStore = useAuthStore()
+
   if (!authStore.$state.userInfo && to.name !== 'login') {
     // 如果没有登录信息且目标路由不是登录页面则跳转到登录页面
     router.replaceAll({ name: 'login' })

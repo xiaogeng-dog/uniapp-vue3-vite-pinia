@@ -6,8 +6,6 @@
 </template>
 
 <script lang="ts" setup>
-import Text from 'XrFrame/components/Text'
-
 const route = useRoute()
 </script>
 ddd

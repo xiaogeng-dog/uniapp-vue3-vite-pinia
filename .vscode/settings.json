@@ -1,39 +1,145 @@
 {
-  "workbench.settings.useSplitJSON": true,
-  // vscode默认启用了根据文件类型自动设置tabsize的选项
-  "editor.detectIndentation": false,
-  // 重新设定tabsize
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "npm.packageManager": "pnpm",
   "editor.tabSize": 2,
-  // #每次保存的时候自动格式化
-  // "editor.formatOnSave": true,
-  // #每次保存的时候将代码按eslint格式进行修复
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+  "prettier.printWidth": 100, // 超过最大值换行
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.eol": "\n",
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/*.log": true,
+    "**/*.log*": true,
+    "**/bower_components": true,
+    "**/dist": true,
+    "**/elehukouben": true,
+    "**/.git": true,
+    "**/.gitignore": true,
+    "**/.svn": true,
+    "**/.DS_Store": true,
+    "**/.idea": true,
+    "**/.vscode": false,
+    "**/yarn.lock": true,
+    "**/tmp": true,
+    "out": true,
+    "dist": true,
+    "node_modules": true,
+    "CHANGELOG.md": true,
+    "examples": true,
+    "res": true,
+    "screenshots": true,
+    "yarn-error.log": true,
+    "**/.yarn": true
   },
-  // 添加 vue 支持
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "vue"
+  "files.exclude": {
+    "**/.cache": true,
+    "**/.editorconfig": true,
+    "**/.eslintcache": true,
+    "**/bower_components": true,
+    "**/.idea": true,
+    "**/tmp": true,
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.vscode/**": true,
+    "**/node_modules/**": true,
+    "**/tmp/**": true,
+    "**/bower_components/**": true,
+    "**/dist/**": true,
+    "**/yarn.lock": true
+  },
+  "stylelint.enable": true,
+  "stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass"],
+  "path-intellisense.mappings": {
+    "@/": "${workspaceRoot}/src"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "i18n-ally.localesPaths": ["src/locales"],
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.sortKeys": true,
+  "i18n-ally.namespace": false,
+  "i18n-ally.enabledParsers": ["ts"],
+  "i18n-ally.sourceLanguage": "en",
+  "i18n-ally.displayLanguage": "zh-CN",
+  "i18n-ally.enabledFrameworks": ["vue", "react"],
+  "cSpell.words": [
+    "brotli",
+    "browserslist",
+    "codemirror",
+    "commitlint",
+    "cropperjs",
+    "echart",
+    "echarts",
+    "esnext",
+    "esno",
+    "iconify",
+    "INTLIFY",
+    "lintstagedrc",
+    "logicflow",
+    "nprogress",
+    "pinia",
+    "pnpm",
+    "qrcode",
+    "sider",
+    "sortablejs",
+    "stylelint",
+    "svgs",
+    "unocss",
+    "unplugin",
+    "unref",
+    "videojs",
+    "VITE",
+    "vitejs",
+    "vueuse",
+    "wangeditor",
+    "xingyu",
+    "yudao",
+    "zxcvbn"
   ],
-  //  #去掉代码结尾的分号
-  "prettier.semi": true,
-  //  #使用单引号替代双引号
-  "prettier.singleQuote": true,
-  //  #让函数(名)和后面的括号之间加个空格
-  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
-  // #这个按用户自身习惯选择
-  "vetur.format.defaultFormatter.html": "js-beautify-html",
-  // #让vue中的js按编辑器自带的ts格式进行格式化
-  "vetur.format.defaultFormatter.js": "vscode-typescript",
-  "vetur.format.options.tabSize": 2,
-  "vetur.format.defaultFormatterOptions": {
-    "js-beautify-html": {
-      "wrap_line_length": 150,
-      "wrap_attributes": true,
-      "end_with_newline": true
-      // #vue组件中html代码格式化样式
-    }
-  }
+  // 控制相关文件嵌套展示
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "$(capture).test.ts, $(capture).test.tsx",
+    "*.tsx": "$(capture).test.ts, $(capture).test.tsx",
+    "*.env": "$(capture).env.*",
+    "package.json": ".git-cz.json,.minicirc,pnpm-lock.yaml,yarn.lock,LICENSE,README*,CHANGELOG*,CNAME,.gitattributes,.eslintrc-auto-import.json,.gitignore,prettier.config.js,stylelint.config.js,commitlint.config.js,.stylelintignore,.prettierignore,.gitpod.yml,.eslintrc.js,.eslintignore,tailwind.config.ts,eslint.config.mjs,.versionrc,postcss.config.js"
+  },
+  "terminal.integrated.scrollback": 10000,
+  "nuxt.isNuxtApp": false
 }

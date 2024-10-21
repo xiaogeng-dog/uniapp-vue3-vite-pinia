@@ -2,16 +2,17 @@ import axios from 'axios'
 import { uniAdapter } from 'fant-axios-adapter'
 import AxiosCancelToken from './AxiosCancelToken'
 const axiosCancelToken = new AxiosCancelToken()
-axios.defaults.timeout = 30000
+import { TIME_OUT, MAIN_BASE_URL } from './config'
+
 export default class ApiClient {
   /**
    * 创建axios
    * @param abortRequest 取消请求配置，可选值：same(取消相同请求)、all(取消所有请求)、none(不取消请求)
    * @returns
    */
-  public static server(abortRequest: 'same' | 'all' | 'none' = 'none') {
+  public static server(abortRequest: 'same' | 'all' | 'none' = 'none', url?: string) {
     // 可以在这里拦截
-    const baseURL = import.meta.env.VITE_BASEURL
+    const baseURL = url || MAIN_BASE_URL
     return ApiClient.create(baseURL, abortRequest)
   }
 
@@ -19,14 +20,35 @@ export default class ApiClient {
     const instance = axios.create({
       withCredentials: true,
       baseURL: baseURL,
+      timeout: TIME_OUT,
       adapter: uniAdapter // 指定适配器
     })
     instance.interceptors.request.use(
       (request) => {
+        console.log('🚀 ~ ApiClient ~ create ~ request:', request)
         // 设置conten-type
-        request.headers ? (request.headers['Content-Type'] = 'application/json') : (request.headers = { 'Content-Type': 'application/json' })
+        // request.headers ? (request.headers['Content-Type'] = 'application/json') : (request.headers = { 'Content-Type': 'application/json' })
         // 设置请求唯一标识（便于查询请求日志）
-        request.headers.trace_id = new Date().getTime()
+        // request.headers.trace_id = new Date().getTime()
+        const token = useAuthStore().token
+        if (request.headers && token) {
+          // 类型缩小
+          switch (request.method) {
+            case 'get':
+              request.params['openId'] = encodeURIComponent(token)
+              break
+            case 'post':
+              if (request.data instanceof Object) {
+                request.data['openid'] = token
+              }
+              break
+            default:
+              break
+          }
+          // if (!(request.headers && request.headers.Authorization)) {
+          //   request.headers.Authorization = token
+          // }
+        }
         switch (abortRequest) {
           case 'all':
             axiosCancelToken.removeAllRequest()
@@ -48,7 +70,10 @@ export default class ApiClient {
     instance.interceptors.response.use(
       (response) => {
         // 此处为前后端约定的接口成功的字段，旨在处理状态码为200的错误响应，开发者可自行调整
-        if (response.data.success) {
+        if (response.status === 200) {
+          if (response?.data?.code == 400) {
+            useAuthStore().getOpenIdAction()
+          }
           return response
         } else {
           const error: Record<string, any> = {}
@@ -88,7 +113,8 @@ export default class ApiClient {
             // 如果当前页面不是登录页面则跳转至登录页面
             if (
               !pages[pages.length - 1].$page ||
-              (pages[pages.length - 1].$page && pages[pages.length - 1].$page.fullPath !== '/pages/login/Login')
+              (pages[pages.length - 1].$page &&
+                pages[pages.length - 1].$page.fullPath !== '/pages/login/Login')
             ) {
               uni.reLaunch({ url: '/pagesOther/login/Login' })
             }

@@ -18,7 +18,15 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+    "outDir": "target", // 请保留这个属性，防止tsconfig.json文件报错
+    "typeRoots": ["./node_modules/@types/", "./types", "./node_modules"]
   },
-  "exclude": ["node_modules", "unpackage", "src/**/*.nvue"]
+  "include": [
+    "src",
+    "types/**/*.d.ts",
+    "src/types/auto-imports.d.ts",
+    "src/types/auto-components.d.ts"
+  ],
+  "exclude": ["dist", "target", "node_modules", "unpackage", "src/**/*.nvue"]
 }

@@ -3,23 +3,23 @@
     <input
       type="text"
       :value="modelValue"
-      @input="onInput"
-      @focus="onFocus"
-      @blur="onBlur"
       :password="password && !showPassword"
       :placeholder="focus ? '' : placeholder"
       placeholder-class="login-input-placeholder"
       :class="{ 'login-input-inp': 'true' }"
+      @input="onInput"
+      @focus="onFocus"
+      @blur="onBlur"
     />
-    <view class="after-icon" v-if="password" @click="doShow">
-      <wd-icon :name="icon" size="16px"></wd-icon>
+    <view v-if="password" class="after-icon" @click="doShow">
+      <van-icon :name="icon" size="16px" />
     </view>
     <view
-      :class="[password && modelValue.toString().length ? 'before-icon' : 'after-icon']"
       v-if="clearable && modelValue.toString().length && focus"
+      :class="[password && modelValue.toString().length ? 'before-icon' : 'after-icon']"
       @click="doClear"
     >
-      <wd-icon name="error-fill" size="16px"></wd-icon>
+      <van-icon name="error-fill" size="16px" />
     </view>
   </view>
 </template>
@@ -29,7 +29,7 @@ interface Props {
   // 输入框值
   modelValue: string | number
   // 是否为密码类型
-  password: boolean
+  password?: boolean
   // 占位符
   placeholder: string
   // 是否显示清除按钮

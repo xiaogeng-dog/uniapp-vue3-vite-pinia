@@ -1,31 +1,48 @@
 <template>
-  <wd-toast></wd-toast>
   <view class="login">
     <view class="login-main">
       <text class="login-main-title">欢迎登陆</text>
       <view class="login-main-subtitle">帮助你搭建好用的uniapp+vue3基础项目</view>
       <view class="login-main-body">
-        <login-input key="username" v-model="username" clearable placeholder="用户名" :maxlength="20"></login-input>
+        <login-input
+          key="username"
+          v-model="username"
+          clearable
+          placeholder="用户名"
+          :maxlength="20"
+        />
         <view class="login-password">
-          <login-input key="password" v-model="password" password clearable placeholder="密码" :maxlength="20"></login-input>
+          <login-input
+            key="password"
+            v-model="password"
+            password
+            clearable
+            placeholder="密码"
+            :maxlength="20"
+          />
         </view>
-        <wd-button size="large" block type="primary" :disabled="disabled" @click="doLogin">登录</wd-button>
+        <van-button round size="large" block type="primary" :disabled="disabled" @click="doLogin">
+          登录
+        </van-button>
       </view>
     </view>
     <view class="login-footer">
       <text>Wot Design Uni</text>
     </view>
+    <van-toast id="van-toast" />
   </view>
 </template>
 
 <script lang="ts" setup>
-import DemoApi from '@/api/DemoApi'
+import DemoApi from '@/api/commonApi'
 import LoginInput from './cmp/LoginInput.vue'
-import { useToast } from 'wot-design-uni/components/wd-toast'
+// #ifdef H5
+import { showSuccessToast, showFailToast, showLoadingToast, closeToast } from 'vant'
+// #endif
 
 const username = ref<string>('') // 用户名
 const password = ref<string>('') // 密码
-const toast = useToast()
+
 const { userInfo } = storeToRefs(useAuthStore()) // 解构pinia的store
 const router = useRouter() // 路由
 
@@ -36,24 +53,17 @@ const disabled = computed(() => {
 
 // 登录接口
 function doLogin() {
-  toast.loading({ loadingType: 'ring', msg: '登录中' })
-  DemoApi.login()
-    .then((resp) => {
-      toast.close()
-      toast.success('登录成功')
-      userInfo.value = resp.data
-      router.replaceAll({ name: 'home' })
-    })
-    .catch((error) => {
-      toast.close()
-      toast.error(error.msg)
-    })
+  // #ifdef H5
+  showLoadingToast({ message: '登录中' })
+  // #endif
 }
 </script>
 
 <style lang="scss" scoped>
 .login {
-  font-family: PingFangSC-Regular, PingFang SC;
+  font-family:
+    PingFangSC-Regular,
+    PingFang SC;
   background-color: #ffffff;
   height: calc(100vh - var(--window-top));
   width: 100vw;

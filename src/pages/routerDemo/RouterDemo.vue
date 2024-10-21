@@ -1,12 +1,12 @@
 <template>
   <view class="router-demo">
-    <test></test>
-    <wd-button block size="large" type="primary" @click="nav1">字符串路径</wd-button>
-    <wd-button block size="large" type="primary" @click="nav2">带有路径的对象</wd-button>
-    <wd-button block size="large" type="primary" @click="nav3">命名的路由</wd-button>
-    <wd-button block size="large" type="primary" @click="nav4">带查询参数</wd-button>
-    <wd-button block size="large" type="primary" @click="nav5">命名的路由传递对象</wd-button>
-    <wd-button block size="large" type="primary" @click="nav6">path+query，传递对象</wd-button>
+    <test />
+    <van-button block size="large" type="primary" @click="nav1">字符串路径</van-button>
+    <van-button block size="large" type="primary" @click="nav2">带有路径的对象</van-button>
+    <van-button block size="large" type="primary" @click="nav3">命名的路由</van-button>
+    <van-button block size="large" type="primary" @click="nav4">带查询参数</van-button>
+    <van-button block size="large" type="primary" @click="nav5">命名的路由传递对象</van-button>
+    <van-button block size="large" type="primary" @click="nav6">path+query，传递对象</van-button>
   </view>
 </template>
 
@@ -54,7 +54,10 @@ function nav6() {
     name: '小星星',
     label: '小熊熊'
   }
-  router.push({ path: '/pagesA/routerDemo/RouterDemo1', query: { user: encodeURIComponent(JSON.stringify(user)) } })
+  router.push({
+    path: '/pagesA/routerDemo/RouterDemo1',
+    query: { user: encodeURIComponent(JSON.stringify(user)) }
+  })
 }
 </script>
 
@@ -67,12 +70,12 @@ function nav6() {
   padding: 0 24rpx 24rpx;
   display: flex;
   flex-direction: column;
-  :deep(wd-button):not(:last-child) {
-    .wd-button {
+  :deep(van-button):not(:last-child) {
+    .van-button {
       margin-bottom: 24rpx;
     }
   }
-  :deep(.wd-button):not(:last-child) {
+  :deep(.van-button):not(:last-child) {
     margin-bottom: 24rpx;
   }
 }

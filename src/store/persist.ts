@@ -1,9 +1,8 @@
-import { PiniaPluginContext } from 'pinia'
-import { deepClone } from 'wot-design-uni/components/common/util'
-
+import type { PiniaPluginContext } from 'pinia'
+import { cloneDeep } from 'lodash'
 export function persist({ store }: PiniaPluginContext) {
   // 暂存State
-  let persistState = deepClone(store.$state)
+  let persistState = cloneDeep(store.$state)
   // 从缓存中读取
   const storageState = uni.getStorageSync(store.$id)
   if (storageState) {
@@ -12,6 +11,6 @@ export function persist({ store }: PiniaPluginContext) {
   store.$state = persistState
   store.$subscribe(() => {
     // 在存储变化的时候将store缓存
-    uni.setStorageSync(store.$id, deepClone(store.$state))
+    uni.setStorageSync(store.$id, cloneDeep(store.$state))
   })
 }

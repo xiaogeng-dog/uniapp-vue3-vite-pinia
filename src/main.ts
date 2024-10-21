@@ -2,7 +2,17 @@ import { createSSRApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import { persist } from './store/persist'
-import 'uno.css'
+// normalize.css
+import 'normalize.css/normalize.css'
+// 全局样式
+import './static/styles/index.less'
+// tailwindcss
+import './static/styles/tailwind.css'
+// #ifdef H5
+window._AMapSecurityConfig = {
+  securityJsCode: 'f1c5c84992c150c1da4a91a23c535788'
+}
+// #endif
 
 const pinia = createPinia()
 pinia.use(persist)
