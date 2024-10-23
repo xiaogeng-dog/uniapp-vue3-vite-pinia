@@ -43,6 +43,14 @@
       }
     },
     {
+      "path": "pages/tools/Tools",
+      "name": "tools",
+      "style": {
+        "navigationBarTitleText": "工具",
+        "navigationBarBackgroundColor": "#E7F0FF"
+      }
+    },
+    {
       "path": "pages/cart/Cart",
       "name": "cart",
       "style": {

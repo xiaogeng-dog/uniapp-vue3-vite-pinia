@@ -7,6 +7,10 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   NProgress.start()
   const authStore = useAuthStore()
+
+  // 路由缓存
+  useCachedViewStore().addCachedView(to)
+
   if (to.name !== 'register') {
     authStore.isJudgeRegister()
   }

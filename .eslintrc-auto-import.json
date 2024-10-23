@@ -110,6 +110,9 @@
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true
+    "watchSyncEffect": true,
+    "routeTransitionName": true,
+    "useCachedViewStore": true,
+    "useDarkModeStore": true
   }
 }

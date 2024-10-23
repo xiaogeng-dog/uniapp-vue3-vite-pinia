@@ -37,7 +37,9 @@ export default class ApiClient {
           // 类型缩小
           switch (request.method) {
             case 'get':
-              request.params['openId'] = encodeURIComponent(token)
+              if (request.params) {
+                request.params['openId'] = encodeURIComponent(token)
+              }
               break
             case 'post':
               if (request.data instanceof Object) {

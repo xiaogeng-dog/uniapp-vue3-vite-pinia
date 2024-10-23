@@ -20,7 +20,12 @@
       <view class="main">
         <van-cell-group :border="false">
           <!-- <van-cell title="主题切换" icon="translate-bold" is-link @click="handleGoTo" /> -->
-          <van-cell title="账号绑定" icon="translate-bold" is-link @click="handleGoTo">
+          <van-cell title="账号绑定" icon="translate-bold" is-link @click="handleGoTo('register')">
+            <template #icon>
+              <image src="../../static/images/me/lvhang.png" class="png" mode="aspectFit" />
+            </template>
+          </van-cell>
+          <van-cell title="工具" icon="translate-bold" is-link @click="handleGoTo('tools')">
             <template #icon>
               <image src="../../static/images/me/lvhang.png" class="png" mode="aspectFit" />
             </template>
@@ -147,9 +152,9 @@ function doLogout() {
   // #endif
 }
 
-function handleGoTo() {
+function handleGoTo(name) {
   useAuthStore().isJudgeRegister(false)
-  router.push({ name: 'register' })
+  router.push({ name })
 }
 </script>
 

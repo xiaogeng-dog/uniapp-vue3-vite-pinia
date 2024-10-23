@@ -10,7 +10,7 @@ import './static/styles/index.less'
 import './static/styles/tailwind.css'
 // #ifdef H5
 window._AMapSecurityConfig = {
-  securityJsCode: 'f1c5c84992c150c1da4a91a23c535788'
+  securityJsCode: import.meta.env.VITE_APP_AMAP_SECURITY_KEY
 }
 // #endif
 

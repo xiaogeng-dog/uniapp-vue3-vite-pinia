@@ -59,7 +59,7 @@ export default defineConfig(async ({ mode }) => {
         ],
         dts: 'src/types/auto-imports.d.ts',
         resolvers: [VantResolver()],
-        dirs: ['src/store'],
+        dirs: ['src/store', 'src/store/modules'],
         eslintrc: {
           enabled: true,
           globalsPropValue: true
